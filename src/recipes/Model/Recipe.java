@@ -1,13 +1,16 @@
 package recipes.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -19,11 +22,15 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long id;
 
     @NotNull
     @NotBlank
-    private String name, description;
+    private String name, category, description;
+
+    @CreationTimestamp
+    private LocalDateTime date;
 
     @NotNull
     @NotEmpty
@@ -35,10 +42,4 @@ public class Recipe {
     @ElementCollection
     private List<String> directions;
 
-    public Recipe(String name, String description, List<String> ingredients, List<String> directions) {
-        this.name = name;
-        this.description = description;
-        this.ingredients = ingredients;
-        this.directions = directions;
-    }
 }

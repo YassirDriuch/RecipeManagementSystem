@@ -29,4 +29,17 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<CustomExceptionMessage> handleBadRequest(BadRequestException e, WebRequest request) {
+        CustomExceptionMessage body = new CustomExceptionMessage(
+                LocalTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Bad Request",
+                e.getMessage(),
+                request.getDescription(false)
+        );
+        log.info("[Exception | handleBadRequest] Bad Request. method thrown");
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
 }
