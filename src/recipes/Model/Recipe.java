@@ -42,4 +42,7 @@ public class Recipe {
     @ElementCollection
     private List<String> directions;
 
+    @JsonIgnore
+    private Long authorId;
+
 }

@@ -42,4 +42,17 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<CustomExceptionMessage> handleForbidden(ForbiddenException e, WebRequest request) {
+        CustomExceptionMessage body = new CustomExceptionMessage(
+                LocalTime.now(),
+                HttpStatus.FORBIDDEN.value(),
+                "Forbidden",
+                e.getMessage(),
+                request.getDescription(false)
+        );
+        log.info("[Exception | handleForbidden] Illegal modification. method thrown");
+        return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
+    }
+
 }
