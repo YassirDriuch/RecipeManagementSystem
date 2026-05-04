@@ -1,4 +1,4 @@
-# recipe-service
+# Recipe Management System
 
 Een REST API voor het beheren van recepten. Gebruikers kunnen recepten aanmaken, bewerken, verwijderen en zoeken op naam of categorie. Elk recept is gekoppeld aan de gebruiker die het heeft aangemaakt.
 
